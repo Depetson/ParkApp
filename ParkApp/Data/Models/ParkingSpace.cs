@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ParkApp.Data.Models;
 
-[Index(nameof(SpaceNumber), IsUnique = true)]
+[Index(nameof(SpaceNumber), nameof(VehicleReg), IsUnique = true)]
 public class ParkingSpace
 {
     [Key]

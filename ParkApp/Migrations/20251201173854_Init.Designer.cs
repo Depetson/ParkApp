@@ -12,7 +12,7 @@ using ParkApp.Data;
 namespace ParkApp.Migrations
 {
     [DbContext(typeof(ParkAppDbContext))]
-    [Migration("20251201170312_Init")]
+    [Migration("20251201173854_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -40,15 +40,16 @@ namespace ParkApp.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("VehicleReg")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int?>("VehicleType")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SpaceNumber")
-                        .IsUnique();
+                    b.HasIndex("SpaceNumber", "VehicleReg")
+                        .IsUnique()
+                        .HasFilter("[VehicleReg] IS NOT NULL");
 
                     b.ToTable("ParkingSpaces");
                 });

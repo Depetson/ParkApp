@@ -37,15 +37,16 @@ namespace ParkApp.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("VehicleReg")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int?>("VehicleType")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SpaceNumber")
-                        .IsUnique();
+                    b.HasIndex("SpaceNumber", "VehicleReg")
+                        .IsUnique()
+                        .HasFilter("[VehicleReg] IS NOT NULL");
 
                     b.ToTable("ParkingSpaces");
                 });
